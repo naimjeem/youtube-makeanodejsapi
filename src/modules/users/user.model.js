@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import validator from 'validator';
 import { hashSync, compareSync } from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
@@ -7,6 +7,8 @@ import uniqueValidator from 'mongoose-unique-validator';
 import Post from '../posts/post.model';
 import { passwordReg } from './user.validations';
 import constants from '../../config/constants';
+
+const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
   {
@@ -42,13 +44,13 @@ const UserSchema = new Schema(
       type: String,
       required: [true, 'Password is required!'],
       trim: true,
-      minlength: [6, 'Password need to be longer!'],
-      validate: {
-        validator(password) {
-          return passwordReg.test(password);
-        },
-        message: '{VALUE} is not a valid password!',
-      },
+      minlength: [4, 'Password need to be longer!'],
+      // validate: {
+      //   validator(password) {
+      //     return passwordReg.test(password);
+      //   },
+      //   message: '{VALUE} is not a valid password!',
+      // },
     },
     favorites: {
       posts: [{
@@ -84,13 +86,12 @@ UserSchema.methods = {
       {
         _id: this._id,
       },
-      constants.JWT_SECRET,
+      'thisisasecret',
     );
   },
   toAuthJSON() {
     return {
       _id: this._id,
-      userName: this.userName,
       token: `JWT ${this.createToken()}`,
     };
   },

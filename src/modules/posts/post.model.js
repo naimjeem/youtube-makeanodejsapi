@@ -1,6 +1,8 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import slug from 'slug';
 import uniqueValidator from 'mongoose-unique-validator';
+
+const Schema = mongoose.Schema;
 
 const PostSchema = new Schema(
   {
@@ -23,7 +25,7 @@ const PostSchema = new Schema(
       lowercase: true,
     },
     user: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
     favoriteCount: {

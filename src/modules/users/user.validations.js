@@ -6,7 +6,7 @@ export default {
   signup: {
     body: {
       email: Joi.string().email().required(),
-      password: Joi.string().regex(passwordReg).required(),
+      // password: Joi.string().regex(passwordReg).required(),
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
       userName: Joi.string().required(),

@@ -31,7 +31,7 @@ const localStrategy = new LocalStrategy(
 // Jwt strategy
 const jwtOpts = {
   jwtFromRequest: ExtractJwt.fromAuthHeader('authorization'),
-  secretOrKey: constants.JWT_SECRET,
+  secretOrKey: 'thisisasecret'
 };
 
 const jwtStrategy = new JWTStrategy(jwtOpts, async (payload, done) => {
